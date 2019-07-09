@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="sicknav350_test" type="sicknav350" name="sicknav350" output="screen">
+  </node>
+
+</launch>
