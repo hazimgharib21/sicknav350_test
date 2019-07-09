@@ -11,23 +11,31 @@ int main(int argc, char *argv[]){
   ros::NodeHandle nh;
   ros::Rate loop_rate(10);
 
-  int count = 0;
+  string ipaddress = (std::string)DEFAULT_SICK_IP_ADDRESS;
+  int port = DEFAULT_SICK_TCP_PORT;
+  SickNav350 sick_nav350(ipaddress.c_str(), port);
+
+  try {
+
+    cout << "Initializing Sick Sensor..." << endl;
+
+    cout << "IP Address : " << ipaddress << endl;
+    cout << "Port : " << port << endl;
+  
+    sick_nav350.Initialize();
+  }catch(...){
+
+    ROS_ERROR("Configuration Error");
+    return -1;
+  
+  }
 
   while(ros::ok()){
-
-    string msg;
-    stringstream ss;
-    ss << count;
-    msg = ss.str();
-
-    ROS_INFO("%s", msg.c_str());
-
     
 
     ros::spinOnce();
     loop_rate.sleep();
 
-    ++count;
     
   
   }
